@@ -8,9 +8,15 @@ using static System.Console;
 
 namespace Makler
 {
+    /// <summary>
+    /// Класс предназначенный для меню и действиями над квартирами
+    /// </summary>
     class ActionsFlats
     {
         private List<Flat> flats = new List<Flat>();
+        /// <summary>
+        /// Метод добавления квартиры
+        /// </summary>
         public void AddFlat()
         {
             Write("Введите количество комнат: ");
@@ -73,6 +79,9 @@ namespace Makler
                 WriteLine();
             }
         }
+        /// <summary>
+        /// Метод записи полей квартиры
+        /// </summary>
         public void WriteFlat()
         {
             Write("Введите количество комнат: ");
@@ -108,6 +117,13 @@ namespace Makler
             }
             SearchAndManageApartments(floor, countRooms, area, region);
         }
+        /// <summary>
+        /// Метод осуществяющий поиск квартир
+        /// </summary>
+        /// <param name="floor">Этаж</param>
+        /// <param name="roomCount">Количество комнат</param>
+        /// <param name="area">Площадь</param>
+        /// <param name="region">Район</param>
         public void SearchAndManageApartments(int floor, int roomCount, double area, string region)
         {
             Flat foundFlat = null;
@@ -143,6 +159,9 @@ namespace Makler
                 flats.Add(requiredFlat);
             }
         }
+        /// <summary>
+        /// Вывод информации о квартирах 
+        /// </summary>
         public void Info()
         {
             //Проверка есть ли вообще квартиры 
@@ -200,6 +219,10 @@ namespace Makler
             }
             WriteLine();
         }
+        /// <summary>
+        /// Метод который выгружает данные с файла
+        /// </summary>
+        /// <param name="actionsFlats">Экземпляр класса</param>
         public void LoadDataFromFile(ActionsFlats actionsFlats)
         {
             string filePath = @"E:\Kyrsova24\Makler\Base.txt";
@@ -249,7 +272,10 @@ namespace Makler
             }
         }
 
-        // Метод для сохранения данных в файл
+        /// <summary>
+        /// Метод для сохранения данных в файл
+        /// </summary>
+        /// <param name="actionsFlats">Экземпляр класса</param>
         public void SaveDataToFile(ActionsFlats actionsFlats)
         {
             string filePath = @"E:\Kyrsova24\Makler\Base.txt";
