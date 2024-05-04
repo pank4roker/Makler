@@ -6,3 +6,11 @@ E:\Kyrsova24\Makler\obj\Debug\Makler.csproj.SuggestedBindingRedirects.cache
 E:\Kyrsova24\Makler\obj\Debug\Makler.csproj.CoreCompileInputs.cache
 E:\Kyrsova24\Makler\obj\Debug\Makler.exe
 E:\Kyrsova24\Makler\obj\Debug\Makler.pdb
+E:\Kyrsova24 — копия\Makler\bin\Debug\Makler.exe.config
+E:\Kyrsova24 — копия\Makler\bin\Debug\Makler.exe
+E:\Kyrsova24 — копия\Makler\bin\Debug\Makler.pdb
+E:\Kyrsova24 — копия\Makler\obj\Debug\Makler.csproj.AssemblyReference.cache
+E:\Kyrsova24 — копия\Makler\obj\Debug\Makler.csproj.SuggestedBindingRedirects.cache
+E:\Kyrsova24 — копия\Makler\obj\Debug\Makler.csproj.CoreCompileInputs.cache
+E:\Kyrsova24 — копия\Makler\obj\Debug\Makler.exe
+E:\Kyrsova24 — копия\Makler\obj\Debug\Makler.pdb

@@ -8,25 +8,30 @@ using static System.Console;
 
 namespace Makler
 {
+    
+
     class Program
     {
-        enum MenuOption { AddApartment = 1, SearchApartments, ShowAllApartments, Exit }
+        
+        enum MenuOption { AddApartment = 1, SearchApartments, AdvancedSearch,ShowAllApartments, Exit }
 
         static void Main(string[] args)
         {
+            Clear();
             ActionsFlats actionsFlats = new ActionsFlats();
-
+            actionsFlats.AuthenticateUser();
+            Clear();
             MenuOption option;
-
             actionsFlats.LoadDataFromFile(actionsFlats);
             while (true)
             {
                 WriteLine("Выберите действие:");
-                WriteLine(" 1. Добавить квартиру");
-                WriteLine(" 2. Поиск вариантов квартир");
-                WriteLine(" 3. Вывести всю картотеку квартир");
+                WriteLine("1. Добавить квартиру");
+                WriteLine("2. Поиск вариантов квартир");
+                WriteLine("3. Расширенный поиск квартир");
+                WriteLine("4. Вывести всю картотеку квартир");
                 ForegroundColor = ConsoleColor.DarkRed;
-                WriteLine(" 4. Выйти");
+                WriteLine("5. Выйти");
                 ResetColor();
 
 
@@ -46,16 +51,16 @@ namespace Makler
                     case MenuOption.AddApartment:
                         actionsFlats.AddFlat();
                         actionsFlats.SaveDataToFile(actionsFlats);
-
                         break;
 
                     case MenuOption.SearchApartments:
                         actionsFlats.WriteFlat();
                         actionsFlats.SaveDataToFile(actionsFlats);
                         break;
-
+                    case MenuOption.AdvancedSearch:
+                        actionsFlats.AdvancedSearchOptions();
+                        break;
                     case MenuOption.ShowAllApartments:
-
                         actionsFlats.Info();
                         break;
 

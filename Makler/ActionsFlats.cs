@@ -143,7 +143,7 @@ namespace Makler
             if (foundFlat != null)
             {
                 ForegroundColor = ConsoleColor.Green;
-                WriteLine("\nНайдена подходящая квартира:");
+                WriteLine("\nНайдена подходящая квартира:\n");
                 ResetColor();
                 foundFlat.Info();
                 WriteLine();
@@ -218,6 +218,114 @@ namespace Makler
                 }
             }
             WriteLine();
+        }
+        public void AdvancedSearchOptions()
+        {
+            WriteLine("Выберите тип квартиры для поиска:");
+            WriteLine("1. Требуемые квартиры");
+            WriteLine("2. Имеющиеся квартиры");
+
+            ConsoleKeyInfo keyInfo = ReadKey(intercept: true);
+            WriteLine(); 
+
+            if (keyInfo.KeyChar == '1')
+            {
+                SearchFlats("RequiredFlat");
+            }
+            else if (keyInfo.KeyChar == '2')
+            {
+                SearchFlats("HavingFlat");
+            }
+            else
+            {
+                WriteLine("Неверный выбор, попробуйте снова.");
+            }
+        }
+        public void SearchFlats(string flatType)
+        {
+            Clear();
+            WriteLine("Введите параметр для поиска:");
+            WriteLine("1. Количество комнат");
+            WriteLine("2. Этаж");
+            WriteLine("3. Площадь");
+            WriteLine("4. Район");
+            ConsoleKeyInfo keyInfo = ReadKey(intercept: true);
+
+            Write("Введите значение параметра: ");
+            string value = ReadLine();
+            bool anyMatchFound = false;
+            foreach (Flat flat in flats)
+            {
+                if (flatType == "RequiredFlat" && flat is RequiredFlat || flatType == "HavingFlat" && flat is HavingFlat)
+                {
+                    bool matchFound = false; // Флаг для отслеживания нахождения совпадения
+
+                    switch (keyInfo.KeyChar)
+                    {
+                        case '1':
+                            matchFound = flat.CountRooms == int.Parse(value);
+                            break;
+                        case '2':
+                            matchFound = flat.Floor == int.Parse(value);
+                            break;
+                        case '3':
+                            matchFound = Math.Abs(flat.Area - double.Parse(value)) < double.Epsilon;
+                            break;
+                        case '4':
+                            matchFound = flat.Region.ToLower() == value.ToLower();
+                            break;
+                        default:
+                            WriteLine("Неверный параметр поиска.");
+                            break;
+                    }
+
+                    if (matchFound)
+                    {
+                        if (!anyMatchFound)
+                        {
+                            ForegroundColor = ConsoleColor.Green;
+                            WriteLine("\nПодходящие варианты по вашему запросу:\n");
+                            anyMatchFound = true;
+                            ResetColor();
+                        }
+                        flat.Info();
+                        WriteLine();
+                    }
+                    else if(!anyMatchFound)
+                    {
+                        ForegroundColor = ConsoleColor.DarkRed;
+                        WriteLine("\nВариантов по вашему запросу не найдено.\n");
+                        ResetColor();
+                        break;
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Метод входа в учетную запись
+        /// </summary>
+        public void AuthenticateUser()
+        {
+            Write("\tДобро пожаловать в информационную систему маклера!\nДля того чтобы войти в систему, необходимо введите логин и пароль.\n");
+            string correctUsername = "admin";  // Задаем верные имя пользователя
+            string correctPassword = "12345";  // и пароль
+
+            while (true)
+            {
+                Write("\t\tВведите логин: ");
+                string username = ReadLine();
+                Write("\t\tВведите пароль: ");
+                string password = ReadLine();
+
+                if (username == correctUsername && password == correctPassword)
+                {
+                    break;  // Выход из цикла, если учетные данные верны
+                }
+                else
+                {
+                    WriteLine("Неверный логин или пароль. Пожалуйста, попробуйте снова.");
+                }
+            }
         }
         /// <summary>
         /// Метод который выгружает данные с файла
