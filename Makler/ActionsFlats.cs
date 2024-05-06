@@ -219,6 +219,9 @@ namespace Makler
             }
             WriteLine();
         }
+        /// <summary>
+        /// Метод выбора в каких квартрах будет происходить поиск
+        /// </summary>
         public void AdvancedSearchOptions()
         {
             WriteLine("Выберите тип квартиры для поиска:");
@@ -241,6 +244,10 @@ namespace Makler
                 WriteLine("Неверный выбор, попробуйте снова.");
             }
         }
+        /// <summary>
+        /// Метод поиска
+        /// </summary>
+        /// <param name="flatType">Тип квартиры</param>
         public void SearchFlats(string flatType)
         {
             Clear();
@@ -269,7 +276,10 @@ namespace Makler
                             matchFound = flat.Floor == int.Parse(value);
                             break;
                         case '3':
-                            matchFound = Math.Abs(flat.Area - double.Parse(value)) < double.Epsilon;
+                            double enteredArea = double.Parse(value);
+                            double lowerBound = enteredArea * 0.9;  // Нижняя граница диапазона (90% от введенной площади)
+                            double upperBound = enteredArea * 1.1;  // Верхняя граница диапазона (110% от введенной площади)
+                            matchFound = flat.Area >= lowerBound && flat.Area <= upperBound;
                             break;
                         case '4':
                             matchFound = flat.Region.ToLower() == value.ToLower();
@@ -289,9 +299,9 @@ namespace Makler
                             ResetColor();
                         }
                         flat.Info();
-                        WriteLine();
+
                     }
-                    else if(!anyMatchFound)
+                    else if (!anyMatchFound)
                     {
                         ForegroundColor = ConsoleColor.DarkRed;
                         WriteLine("\nВариантов по вашему запросу не найдено.\n");
@@ -300,6 +310,7 @@ namespace Makler
                     }
                 }
             }
+            WriteLine();
         }
         /// <summary>
         /// Метод входа в учетную запись
